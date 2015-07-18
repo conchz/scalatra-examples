@@ -5,7 +5,7 @@
 .cache
 .lib/
 dist/*
-class/
+classes/
 target/
 lib_managed/
 src_managed/

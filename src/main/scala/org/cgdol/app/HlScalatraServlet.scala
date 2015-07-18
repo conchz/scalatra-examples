@@ -1,9 +1,15 @@
 package org.cgdol.app
 
+import org.cgdol.app.db.SlickSupport
 import org.scalatra._
 import scalate.ScalateSupport
 
-class ScalatraServlet extends ScalatraexamplesStack {
+/**
+ * Created by dolphineor on 2015-7-18.
+ *
+ * HLScalatraServlet
+ */
+class HlScalatraServlet extends ScalatraStack with SlickSupport {
 
   get("/") {
     <html>

@@ -1,16 +1,8 @@
-//import com.earldouglas.xsbtwebplugin.PluginKeys._
-//import com.earldouglas.xsbtwebplugin.WebPlugin._
-//import com.earldouglas.xsbtwebplugin.PluginKeys.port
-
-import com.earldouglas.xwp.ContainerPlugin.autoImport
 import com.mojolly.scalate.ScalatePlugin.ScalateKeys._
 
 organization := "com.github.dolphineor"
-
 name := "scalatra-examples"
-
 version := "0.1.0-SNAPSHOT"
-
 scalaVersion := "2.11.7"
 
 javacOptions ++= Seq(
@@ -38,6 +30,7 @@ libraryDependencies ++= {
   val metricsVersion = "3.0.2"
   Seq(
     "org.scalatra" %% "scalatra" % ScalatraVersion,
+    "org.scalatra" %% "scalatra-auth" % ScalatraVersion,
     "org.scalatra" %% "scalatra-scalate" % ScalatraVersion,
     "org.scalatra" %% "scalatra-specs2" % ScalatraVersion % "test",
     "org.scala-lang.modules" %% "scala-parser-combinators" % "1.0.4",
@@ -49,10 +42,10 @@ libraryDependencies ++= {
     "com.codahale.metrics" % "metrics-healthchecks" % metricsVersion,
     "com.zaxxer" % "HikariCP" % "2.3.8",
     "mysql" % "mysql-connector-java" % "5.1.36",
+    "javax.servlet" % "javax.servlet-api" % "3.1.0" % "provided,container",
+    "org.json4s" %% "json4s-native" % "3.2.11",
     "org.javassist" % "javassist" % "3.20.0-GA",
-    "org.eclipse.jetty" % "jetty-webapp" % "9.3.1.v20150714" % "container",
-    "org.eclipse.jetty" % "jetty-plus" % "9.3.1.v20150714",
-    "javax.servlet" % "javax.servlet-api" % "3.1.0" % "provided"
+    "org.slf4j" % "slf4j-log4j12" % "1.7.12"
   )
 }
 
@@ -60,12 +53,17 @@ ivyScala := ivyScala.value map {
   _.copy(overrideScalaVersion = true)
 }
 
-//enablePlugins(JettyPlugin)
-//jetty()
-//webSettings
-
-//env in Compile := Some(file("./src/main/webapp/WEB-INF/jetty-env.xml").asFile)
-//port in container.Configuration := 8081
+enablePlugins(ContainerPlugin, JettyPlugin)
+containerLibs := {
+  val jettyVersion = "9.3.1.v20150714"
+  Seq(
+    "org.eclipse.jetty" % "jetty-webapp" % jettyVersion % "container",
+    "org.eclipse.jetty" % "jetty-plus" % jettyVersion % "container",
+    "org.eclipse.jetty" % "jetty-runner" % jettyVersion % "container" intransitive()
+  )
+}
+containerConfigFile := Some(file("./src/main/webapp/WEB-INF/jetty-env.xml").asFile)
+containerPort := 8081
 
 scalateTemplateConfig in Compile <<= (sourceDirectory in Compile) { base =>
   Seq(
