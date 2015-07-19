@@ -19,18 +19,19 @@ scalacOptions ++= Seq(
 resolvers ++= Seq(
   Resolver.mavenLocal,
   Resolver.sonatypeRepo("releases"),
-  "maven repository" at "https://repo1.maven.org/maven2/",
-  "typesafe repository" at "https://repo.typesafe.com/typesafe/releases/",
-  "sbt-plugin repository" at "https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/",
-  "Scala-Tools Maven2 Releases Repository" at "http://scala-tools.org/repo-releases"
+  "maven repo" at "https://repo1.maven.org/maven2/",
+  "typesafe repo" at "https://repo.typesafe.com/typesafe/releases/",
+  "scalaz repo" at "https://dl.bintray.com/scalaz/releases/",
+  "sbt-plugin repo" at "https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/"
 )
 
 libraryDependencies ++= {
-  val ScalatraVersion = "2.3.1"
+  val ScalatraVersion = "2.4.0-RC2-2"
   val metricsVersion = "3.0.2"
   Seq(
     "org.scalatra" %% "scalatra" % ScalatraVersion,
     "org.scalatra" %% "scalatra-auth" % ScalatraVersion,
+    "org.scalatra" %% "scalatra-json" % ScalatraVersion,
     "org.scalatra" %% "scalatra-scalate" % ScalatraVersion,
     "org.scalatra" %% "scalatra-specs2" % ScalatraVersion % "test",
     "org.scala-lang.modules" %% "scala-parser-combinators" % "1.0.4",
@@ -43,9 +44,9 @@ libraryDependencies ++= {
     "com.zaxxer" % "HikariCP" % "2.3.8",
     "mysql" % "mysql-connector-java" % "5.1.36",
     "javax.servlet" % "javax.servlet-api" % "3.1.0" % "provided,container",
-    "org.json4s" %% "json4s-native" % "3.2.11",
-    "org.javassist" % "javassist" % "3.20.0-GA",
-    "org.slf4j" % "slf4j-log4j12" % "1.7.12"
+    "org.slf4j" % "slf4j-api" % "1.7.12" % "runtime",
+    "org.json4s" %% "json4s-native" % "3.3.0.RC3",
+    "org.javassist" % "javassist" % "3.20.0-GA"
   )
 }
 
@@ -53,16 +54,17 @@ ivyScala := ivyScala.value map {
   _.copy(overrideScalaVersion = true)
 }
 
-enablePlugins(ContainerPlugin, JettyPlugin)
+enablePlugins(JettyPlugin)
 containerLibs := {
   val jettyVersion = "9.3.1.v20150714"
   Seq(
+    "org.eclipse.jetty" % "jetty-runner" % jettyVersion intransitive(),
     "org.eclipse.jetty" % "jetty-webapp" % jettyVersion % "container",
-    "org.eclipse.jetty" % "jetty-plus" % jettyVersion % "container",
-    "org.eclipse.jetty" % "jetty-runner" % jettyVersion % "container" intransitive()
+    "org.eclipse.jetty" % "jetty-plus" % jettyVersion % "container"
   )
 }
-containerConfigFile := Some(file("./src/main/webapp/WEB-INF/jetty-env.xml").asFile)
+
+containerConfigFile := Some(file("./src/main/webapp/WEB-INF/jetty-env.xml"))
 containerPort := 8081
 
 scalateTemplateConfig in Compile <<= (sourceDirectory in Compile) { base =>

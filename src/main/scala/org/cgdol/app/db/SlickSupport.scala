@@ -19,7 +19,7 @@ trait SlickSupport extends ScalatraServlet with FutureSupport {
 
   override protected implicit def executor: ExecutionContext = scala.concurrent.ExecutionContext.Implicits.global
 
-  val hcpds = new InitialContext().lookup("java:comp/env/jdbc/test") match {
+  private[this] val hcpds = new InitialContext().lookup("java:comp/env/jdbc/test") match {
     case dataSource: HikariDataSource => dataSource
     case _ => throw new SQLException("HikariCP connection pool initialize failed")
   }

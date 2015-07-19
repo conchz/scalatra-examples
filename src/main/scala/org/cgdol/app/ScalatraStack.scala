@@ -7,6 +7,9 @@ import org.fusesource.scalate.layout.DefaultLayoutStrategy
 import javax.servlet.http.HttpServletRequest
 import collection.mutable
 
+/**
+ * Created by dolphineor on 2015-7-18.
+ */
 trait ScalatraStack extends ScalatraServlet with ScalateSupport {
 
   notFound {
