@@ -30,8 +30,7 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= {
-  val ScalatraVersion = "2.4.0-RC2-2"
-  val metricsVersion = "3.0.2"
+  val ScalatraVersion = "2.4.0.RC3"
   Seq(
     "org.scalatra" %% "scalatra" % ScalatraVersion,
     "org.scalatra" %% "scalatra-auth" % ScalatraVersion,
@@ -42,19 +41,15 @@ libraryDependencies ++= {
     "org.scala-lang.modules" %% "scala-xml" % "1.0.4",
     "javax.servlet" % "javax.servlet-api" % "3.1.0" % "provided",
     "com.typesafe" % "config" % "1.3.0",
-    "com.typesafe.slick" %% "slick" % "3.0.0",
-    "org.javassist" % "javassist" % "3.20.0-GA",
-    "org.slf4j" % "slf4j-api" % "1.7.12" % "runtime",
+    "com.typesafe.slick" %% "slick" % "3.1.0",
     "ch.qos.logback" % "logback-classic" % "1.1.3" % "runtime",
-    "com.codahale.metrics" % "metrics-core" % metricsVersion,
-    "com.codahale.metrics" % "metrics-healthchecks" % metricsVersion,
-    "com.zaxxer" % "HikariCP" % "2.3.8",
+    "com.zaxxer" % "HikariCP" % "2.4.1",
     "mysql" % "mysql-connector-java" % "5.1.36"
   )
 }
 
 enablePlugins(JettyPlugin)
-containerLibs := Seq("org.eclipse.jetty" % "jetty-runner" % "9.3.1.v20150714" intransitive())
+containerLibs := Seq("org.eclipse.jetty" % "jetty-runner" % "9.3.4.v20151007" intransitive())
 containerPort := 8081
 containerConfigFile in Compile := Some(file("./src/main/webapp/WEB-INF/jetty-env.xml"))
 
