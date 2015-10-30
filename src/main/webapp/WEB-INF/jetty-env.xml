@@ -5,20 +5,21 @@
         <Arg>
             <Ref refid="mysqlDataSource"/>
         </Arg>
-        <Arg>jdbc/test</Arg>
+        <Arg>jdbc/scalatraDS</Arg>
         <Arg>
             <New class="com.zaxxer.hikari.HikariDataSource">
                 <Arg>
                     <New class="com.zaxxer.hikari.HikariConfig">
-                        <Set name="dataSourceClassName">com.mysql.jdbc.jdbc2.optional.MysqlDataSource</Set>
-                        <Set name="username">cgdol</Set>
+                        <!--<Set name="dataSourceClassName">com.mysql.jdbc.jdbc2.optional.MysqlDataSource</Set>-->
+                        <Set name="username">test</Set>
                         <Set name="password">test1234</Set>
                         <Set name="connectionTimeout">30000</Set>
+                        <Set name="idleTimeout">30000</Set>
                         <Set name="maximumPoolSize">20</Set>
                         <Set name="connectionTestQuery">SELECT 1</Set>
                         <Call name="addDataSourceProperty">
                             <Arg>url</Arg>
-                            <Arg>jdbc:mysql://127.0.0.1:3306/test?characterEncoding=UTF-8</Arg>
+                            <Arg>jdbc:mysql://127.0.0.1:3306/reactive?characterEncoding=UTF-8</Arg>
                         </Call>
                         <Call name="addDataSourceProperty">
                             <Arg>cachePrepStmts</Arg>

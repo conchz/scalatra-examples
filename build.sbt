@@ -31,6 +31,7 @@ resolvers ++= Seq(
 
 libraryDependencies ++= {
   val ScalatraVersion = "2.4.0.RC3"
+  val slickVersion = "3.1.0"
   Seq(
     "org.scalatra" %% "scalatra" % ScalatraVersion,
     "org.scalatra" %% "scalatra-auth" % ScalatraVersion,
@@ -38,13 +39,12 @@ libraryDependencies ++= {
     "org.scalatra" %% "scalatra-json" % ScalatraVersion,
     "org.scalatra" %% "scalatra-scalate" % ScalatraVersion,
     "org.scalatra" %% "scalatra-specs2" % ScalatraVersion % "test",
-    "org.scala-lang.modules" %% "scala-parser-combinators" % "1.0.4",
-    "org.scala-lang.modules" %% "scala-xml" % "1.0.4",
     "javax.servlet" % "javax.servlet-api" % "3.1.0" % "provided",
     "com.typesafe" % "config" % "1.3.0",
-    "com.typesafe.slick" %% "slick" % "3.1.0",
-    "ch.qos.logback" % "logback-classic" % "1.1.3" % "runtime",
+    "com.typesafe.slick" %% "slick" % slickVersion,
+    "com.typesafe.slick" %% "slick-hikaricp" % slickVersion,
     "com.zaxxer" % "HikariCP" % "2.4.1",
+    "ch.qos.logback" % "logback-classic" % "1.1.3" % "runtime",
     "mysql" % "mysql-connector-java" % "5.1.37"
   )
 }

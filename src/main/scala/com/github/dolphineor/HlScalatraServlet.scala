@@ -1,13 +1,12 @@
-package org.cgdol.app
+package com.github.dolphineor
 
-import org.cgdol.app.db.SlickSupport
-import org.scalatra._
-import scalate.ScalateSupport
+import com.github.dolphineor.model.SlickSupport
 
 /**
- * Created by dolphineor on 2015-7-18.
- *
+ * Created on 2015-07-18.
  * HLScalatraServlet
+ *
+ * @author dolphineor
  */
 class HlScalatraServlet extends ScalatraStack with SlickSupport {
 
@@ -19,7 +18,9 @@ class HlScalatraServlet extends ScalatraStack with SlickSupport {
       </head>
       <body>
         <h1>Hello, world!</h1>
-        Say <a href="hello-scalate">hello to Scalate</a>.
+        Say
+        <a href="hello-scalate">hello to Scalate</a>
+        .
       </body>
     </html>
   }

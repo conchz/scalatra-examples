@@ -1,14 +1,12 @@
-package org.cgdol.app
+package com.github.dolphineor
 
 import org.scalatra._
-import scalate.ScalateSupport
-import org.fusesource.scalate.{TemplateEngine, Binding}
-import org.fusesource.scalate.layout.DefaultLayoutStrategy
-import javax.servlet.http.HttpServletRequest
-import collection.mutable
+import org.scalatra.scalate.ScalateSupport
 
 /**
- * Created by dolphineor on 2015-7-18.
+ * Created on 2015-07-18.
+ *
+ * @author dolphineor
  */
 trait ScalatraStack extends ScalatraServlet with ScalateSupport {
 

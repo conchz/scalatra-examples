@@ -1,11 +1,14 @@
+package com.github.dolphineor
+
 import javax.servlet.ServletContext
 
-import org.cgdol.app.HlScalatraServlet
 import org.scalatra._
 import org.slf4j.LoggerFactory
 
 /**
- * Created by dolphineor on 2015-7-18.
+ * Created on 2015-07-18.
+ *
+ * @author dolphineor
  */
 class ScalatraBootstrap extends LifeCycle {
 
@@ -15,7 +18,7 @@ class ScalatraBootstrap extends LifeCycle {
 
   override def init(context: ServletContext) {
     context.mount(hlServlet, "/*")
-    logger.info("Init succeed")
+    logger.info("Init succeed.")
   }
 
 

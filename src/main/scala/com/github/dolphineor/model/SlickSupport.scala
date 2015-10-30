@@ -1,4 +1,4 @@
-package org.cgdol.app.db
+package com.github.dolphineor.model
 
 import java.sql.SQLException
 import javax.naming.InitialContext
@@ -11,7 +11,9 @@ import slick.jdbc.JdbcBackend.Database
 import scala.concurrent.ExecutionContext
 
 /**
- * Created by dolphineor on 2015-7-18.
+ * Created on 2015-07-18.
+ *
+ * @author dolphineor
  */
 trait SlickSupport extends ScalatraServlet with FutureSupport {
 
@@ -19,7 +21,7 @@ trait SlickSupport extends ScalatraServlet with FutureSupport {
 
   override protected implicit def executor: ExecutionContext = scala.concurrent.ExecutionContext.Implicits.global
 
-  private[this] val hcpds = new InitialContext().lookup("java:comp/env/jdbc/test") match {
+  private[this] val hcpds = new InitialContext().lookup("java:comp/env/jdbc/scalatraDS") match {
     case dataSource: HikariDataSource => dataSource
     case _ => throw new SQLException("HikariCP connection pool initialize failed")
   }
